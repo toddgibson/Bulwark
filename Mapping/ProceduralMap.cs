@@ -15,10 +15,14 @@ namespace Bulwark.Mapping
         private readonly OpenSimplexNoise _noise = new OpenSimplexNoise();
         private readonly RandomNumberGenerator rng = new RandomNumberGenerator();
 
+        private Vector3 mapStartingPosition;
+
         public override void _Ready()
         {
             _noise.Seed = mapSeed;
             rng.Seed = (ulong) mapSeed;
+            
+            CalculateMapStartingPosition();
             
             for (var x = 0; x < mapSize.x; x++)
             {
@@ -41,14 +45,26 @@ namespace Bulwark.Mapping
             }
         }
         
+        private void CalculateMapStartingPosition()
+        {
+            float offset = 0;
+            if (mapSize.y / 2 % 2 != 0)
+                offset = TILE_WIDTH / 2;
+
+            var x = -TILE_WIDTH * (mapSize.x / 2) - offset;
+            var z = TILE_HEIGHT * 0.75f * (mapSize.y / 2);
+
+            mapStartingPosition = new Vector3(x, 0, z);
+        }
+        
         private Vector3 CalculateTileWorldPosition(int x, int y)
         {
             var offset = 0f;
             if (y % 2 != 0)
                 offset = TILE_WIDTH / 2f;
 
-            var rx = x * TILE_WIDTH + offset;
-            var rz = y * TILE_HEIGHT * 0.75f;
+            var rx = mapStartingPosition.x + x * TILE_WIDTH + offset;
+            var rz = mapStartingPosition.y + y * TILE_HEIGHT * 0.75f;
 
             return new Vector3(rx, 0, rz);
         }
