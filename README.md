@@ -1,5 +1,5 @@
 # Bulwark
-### A game for GoGodotJam 2021. 
+### A game built in the Godot game engine for GoGodotJam 2021. 
 
 ----------
 
