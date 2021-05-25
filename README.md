@@ -27,4 +27,4 @@ Kill all of the invaders before they destroy all of your houses.
 
 ----------
 
-![Islands are starting to form]("https://github.com/toddgibson/Bulwark/tree/master/Screenshots/FirstIsland.png")
+![Islands are starting to form](https://github.com/toddgibson/Bulwark/blob/master/Screenshots/FirstIsland.png?raw=true)
